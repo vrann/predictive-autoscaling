@@ -23,9 +23,10 @@ Prometheus has released fast and memory efficient Stream API https://prometheus.
 which allows to read the data dirtectly from TSDB in the format how it's stored there with no overhead on parsing/encoding etc. 
 Also, it reads only the data which consumer is ready to accept (back-pressured), so there is no memory wasted for the data which will never be used.
 
-This project connects Client code which allows to use this API from scala. The client uses Snappy-encoded Proto messages
-to make a request. The response looks like a stream of bytes in TSDB format each wrapped in Proto message. Client library
-encodes the request, and provides streaming API to read the responses
+This project implements API client to use streaming API from java/scala. 
+
+The client uses Snappy-encoded Proto messages to make a request. The response looks like a stream of bytes in TSDB 
+format each wrapped in Proto message. Client library encodes the request, and provides streaming API to read the responses
 
 #### Running
 
@@ -79,7 +80,7 @@ val prometheusReadRequest = Remote.ReadRequest
 Client:
 
 ```scala
-new PrometheusStreamReader(address)
+new PrometheusStreamReader("localhost:9090")
           .stream(prometheusReadRequest)
           .onComplete(t =>
           t.foreach(s =>
