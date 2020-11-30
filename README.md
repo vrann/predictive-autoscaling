@@ -1,12 +1,16 @@
 ### Predictions
 
-Prediction part uses Cloudera Spark TS, an open implementation of the ARIMA model on top of Scala VM.
-ARIMA allows to train a model against the time series set and use either Seasonality or Moving Averages to predict next values.
+ARIMA model https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average allows to train a model against the 
+time series set and use either Seasonality or Moving Averages to predict next values.
 In this experiment we use the moving averages based on the observed value and update it with every new value observed.
 
-This gives а real-time re-trains itself
-It Can be connected to be fed with the dta from Prometheus or from the application itself directly.
-On average update of the model with the new value and forecasting next 50 values takes 800 micros (locally on MacBook)
+We use a fork of Cloudera Spark TS https://github.com/sryza/spark-timeseries updated to the latest version of Spark for
+the open implemenattion of ARIMA.
+
+This gives а real-time model which re-trains itself based on incoming values. 
+It Can be connected to be fed with the data from Prometheus or from the application itself directly.
+
+On average the update of the model with the new value and forecasting next 50 values takes 800 micros (locally on MacBook)
 
 #### Running
 
