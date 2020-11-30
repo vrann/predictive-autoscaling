@@ -1,4 +1,4 @@
-package io.adobe
+package io.adobe.prometheus
 
 import akka.stream.scaladsl.Framing.FramingException
 import akka.stream.stage.{GraphStage, GraphStageLogic, InHandler, OutHandler}

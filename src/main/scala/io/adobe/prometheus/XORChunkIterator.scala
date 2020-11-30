@@ -1,4 +1,4 @@
-package io.adobe
+package io.adobe.prometheus
 
 class XORChunkIterator(bytes: Array[Byte]) {
   val bits = BigEndianBitSet.valueOf(bytes)

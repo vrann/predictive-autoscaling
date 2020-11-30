@@ -1,5 +1,6 @@
 package io.adobe
 
+import io.adobe.prometheus.PrometheusStreamReader
 import org.scalatest.FunSuite
 
 class PrometheusStreamReaderTest extends FunSuite {

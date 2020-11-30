@@ -1,7 +1,7 @@
-package io.adobe
+package io.adobe.prometheus
 
-import akka.actor.typed.{ActorSystem, Behavior, SupervisorStrategy}
 import akka.actor.typed.scaladsl.Behaviors.{empty, setup, supervise}
+import akka.actor.typed.{ActorSystem, Behavior, SupervisorStrategy}
 
 object App {
 

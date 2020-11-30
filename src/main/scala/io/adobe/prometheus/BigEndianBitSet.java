@@ -1,4 +1,4 @@
-package io.adobe;
+package io.adobe.prometheus;
 
 import java.util.Arrays;
 
