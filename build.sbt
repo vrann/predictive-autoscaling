@@ -16,6 +16,8 @@ assemblyMergeStrategy in assembly := {
   case _                                                              => MergeStrategy.first
 }
 
+mainClass in assembly := Some("io.adobe.prometheus.App")
+
 val `LinearRegression` = project
   .in(file("."))
   .settings(

@@ -22,7 +22,7 @@ object Prediction {
    * 1. https://medium.com/making-sense-of-data/time-series-next-value-prediction-using-regression-over-a-rolling-window-228f0acae363
    * 2. https://prometheus.io/blog/
    */
-  def main2(args: Array[String]): Unit = {
+  def main(args: Array[String]): Unit = {
     val dataFile = getClass.getClassLoader.getResourceAsStream("Traffic.csv")
     val rawData = scala.io.Source.fromInputStream(dataFile).getLines().toArray.map(_.toDouble)
     //split data 80/20 into training/testing. We will train model on the training set, then will try to predict testing data in real time one by one
