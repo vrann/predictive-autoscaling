@@ -33,7 +33,11 @@ class PrometheusStreamReader(val address: String) {
           val data = chunk.getData.toByteArray.drop(2).dropRight(3)
           val xorIterator = new XORChunkIterator(data)
           while (xorIterator.hasNext) {
-            xorIterator.next()
+            try {
+              xorIterator.next()
+            } catch {
+              case ex: Exception => println(ex)
+            }
             val next = (xorIterator.t, xorIterator.v)
             transformed = transformed :+ next
           }

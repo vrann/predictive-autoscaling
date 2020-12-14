@@ -117,7 +117,7 @@ public class BigEndianBitSet {
     public boolean readBit() throws Exception {
         int firstWord = bitsOffset / BITS_PER_WORD;
         if (firstWord >= wordsInUse) {
-            throw new Exception("Index is larger than available");
+            throw new Exception("BigEndianBitSet: bits are tried to be read from the word with the index is larger than available when reading one bit");
         }
         int startFrom = bitsOffset % BITS_PER_WORD;
         int shift = BITS_PER_WORD - startFrom - 1;
@@ -146,7 +146,7 @@ public class BigEndianBitSet {
         var bitsRead = nbits;
         int firstWord = bitsOffset / BITS_PER_WORD;
         if (firstWord >= wordsInUse) {
-            throw new Exception("Index is larger than available");
+            throw new Exception("BigEndianBitSet: bits are tried to be read from the word with the index is larger than available");
         }
         int startFrom = bitsOffset % BITS_PER_WORD;
         int valid = BITS_PER_WORD - startFrom;
@@ -170,8 +170,8 @@ public class BigEndianBitSet {
 
         current++;
 
-        if (current > wordsInUse) {
-            throw new Exception("Index is larger than available");
+        if (current >= wordsInUse) {
+            throw new Exception("BigEndianBitSet: bits are tried to be read from the word with the incremented index is larger than available");
         }
 
         int bitsLeftInSecondWord = BITS_PER_WORD - nbits;

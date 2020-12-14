@@ -12,17 +12,20 @@ private final class UvarintFramingStage extends GraphStage[FlowShape[ByteString,
     var s = 0
     var i = 0
     var next = bs.next().toInt & 0xff
-    while (next >= 0x80 && i < 9) {
+    while (i <= 9) {
+      if (next < 0x80) {
+        if (i == 9 && next > 1) {
+          return (0, 0)
+        }
+        return (x | next << s, i + 1)
+      }
       x |= (next & 0x7f)
       x <<= s
       s += 7
       i += 1
       next = bs.next().toInt & 0xff
     }
-    if (i == 9 && next > 1) return (0, 0)
-    x |= ((next & 0x7f) << s)
-    i += 1
-    (x, i)
+    (0, -(i + 1))
   }
 
   private val minimumChunkSize = 1
@@ -59,7 +62,8 @@ private final class UvarintFramingStage extends GraphStage[FlowShape[ByteString,
         if (buffSize >= frameSize) {
           pushFrame()
         } else if (buffSize >= minimumChunkSize) {
-          val (frameSize, uVariantSize) = uVariantDecoder(buffer.iterator)
+          val (uVariantFrameSize, uVariantSize) = uVariantDecoder(buffer.iterator)
+          this.frameSize = uVariantFrameSize
           buffer = buffer.drop(4 + uVariantSize)
           if (frameSize < minimumChunkSize) {
             failStage(

@@ -1,5 +1,20 @@
-val akkaVersion = "2.6.6"
+val akkaVersion = "2.6.10"
 val akkaHttpVersion = "10.2.0"
+
+assemblyMergeStrategy in assembly := {
+  case PathList("jackson-annotations-2.10.3.jar", xs @ _*)            => MergeStrategy.last
+  case PathList("jackson-core-2.10.3.jar", xs @ _*)                   => MergeStrategy.last
+  case PathList("jackson-databind-2.10.3.jar", xs @ _*)               => MergeStrategy.last
+  case PathList("jackson-dataformat-cbor-2.10.3.jar", xs @ _*)        => MergeStrategy.last
+  case PathList("jackson-datatype-jdk8-2.10.3.jar", xs @ _*)          => MergeStrategy.last
+  case PathList("jackson-datatype-jsr310-2.10.3.jar", xs @ _*)        => MergeStrategy.last
+  case PathList("jackson-module-parameter-names-2.10.3.jar", xs @ _*) => MergeStrategy.last
+  case PathList("jackson-module-paranamer-2.10.3.jar", xs @ _*)       => MergeStrategy.last
+  case PathList("META-INF", "MANIFEST.MF")                            => MergeStrategy.discard
+  case PathList("META-INF", xs @ _*)                                  => MergeStrategy.discard
+  case PathList("reference.conf")                                     => MergeStrategy.concat
+  case _                                                              => MergeStrategy.first
+}
 
 val `LinearRegression` = project
   .in(file("."))
@@ -34,4 +49,4 @@ val `LinearRegression` = project
     // show full stack traces and test case durations
     testOptions in Test += Tests.Argument("-oDF"),
     logBuffered in Test := false,
-    licenses := Seq(("CC0", url("http://creativecommons.org/publicdomain/zero/1.0"))))
+    licenses := Seq(("CC0", url("https://creativecommons.org/publicdomain/zero/1.0"))))

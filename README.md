@@ -28,6 +28,22 @@ This project implements API client to use streaming API from java/scala.
 The client uses Snappy-encoded Proto messages to make a request. The response looks like a stream of bytes in TSDB 
 format each wrapped in Proto message. Client library encodes the request, and provides streaming API to read the responses
 
+#### Deployment
+
+1. make sure that the java version 11 is used in SBT, because protobuf DTOs werr compiled with it:
+```bash
+> export JAVA_HOME=`/usr/libexec/java_home -v 11.0.3`
+> sbt                                                                                                                                                      ✔  11312  04:56:15
+[info] welcome to sbt 1.4.0 (Oracle Corporation Java 11.0.3)
+> java --version                                                                                                                                           ✔  11314  04:59:51
+java 11.0.3 2019-04-16 LTS
+Java(TM) SE Runtime Environment 18.9 (build 11.0.3+12-LTS)
+Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.3+12-LTS, mixed mode)
+
+```
+2. `sbt clean && sbt assembly`
+3. `docker build -t docker-acceleration-snapshot.dr-uw2.adobeitc.com/prediction:0.0.2 . && docker push docker-acceleration-snapshot.dr-uw2.adobeitc.com/prediction:0.0.2`
+
 #### Running
 
 1. Download/Run Prometheus locally https://github.com/prometheus/prometheus
