@@ -43,7 +43,8 @@ val `LinearRegression` = project
       "org.scalanlp" % "breeze_2.12" % "1.1",
       "org.scalanlp" % "breeze-viz_2.12" % "1.1",
       "org.xerial.snappy" % "snappy-java" % "1.1.8",
-      "com.google.protobuf" % "protobuf-java" % "3.13.0"),
+      "com.google.protobuf" % "protobuf-java" % "3.13.0",
+      "com.typesafe.akka" %% "akka-http-spray-json" % akkaHttpVersion),
     fork in run := true,
     Global / cancelable := false, // ctrl-c
     // disable parallel tests
